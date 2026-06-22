@@ -5,9 +5,8 @@
  */
 
 #include "totem.dtsi"
-#include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
-/* 1. Disable the physical matrix scanner on the dongle */
+/* 1. Safely remove the physical matrix scanner on the dongle */
 / {
     chosen {
         /delete-property/ zmk,kscan;
@@ -18,39 +17,14 @@
     status = "disabled";
 };
 
-/* 2. Safely create NEW pin configurations that omit the MISO pin */
-&pinctrl {
-    spi2_no_miso_default: spi2_no_miso_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
-                    <NRF_PSEL(SPIM_MOSI, 1, 15)>;
-        };
-    };
-
-    spi2_no_miso_sleep: spi2_no_miso_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
-                    <NRF_PSEL(SPIM_MOSI, 1, 15)>;
-            low-power-enable;
-        };
-    };
+/* 2. Target the core SPI bus to set your custom CS pin (D9) */
+&spi2 {
+    status = "okay";
+    cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
 };
 
-/* 3. Apply the new pins and your custom Prospector wiring */
-&xiao_spi {
-    status = "okay";
-    
-    /* Use our custom pins defined above */
-    pinctrl-0 = <&spi2_no_miso_default>;
-    pinctrl-1 = <&spi2_no_miso_sleep>;
-    pinctrl-names = "default", "sleep";
-    
-    /* Assign custom CS pin */
-    cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
-    
-    /* Override Prospector defaults (Zephyr uses st7789@0 for the node) */
-    st7789@0 {
-        dc-gpios = <&xiao_d 7 GPIO_ACTIVE_HIGH>;
-        reset-gpios = <&xiao_d 3 GPIO_ACTIVE_HIGH>;
-    };
+/* 3. Target the prospector display directly by its label to set DC (D7) and RST (D3) */
+&prospector {
+    dc-gpios = <&xiao_d 7 GPIO_ACTIVE_HIGH>;
+    reset-gpios = <&xiao_d 3 GPIO_ACTIVE_HIGH>;
 };
