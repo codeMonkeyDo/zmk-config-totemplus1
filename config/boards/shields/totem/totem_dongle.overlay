@@ -7,7 +7,7 @@
 #include "totem.dtsi"
 #include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
-/* 1. Remove the kscan from the chosen nodes and disable the physical matrix */
+/* 1. Disable the physical matrix scanner on the dongle */
 / {
     chosen {
         /delete-property/ zmk,kscan;
@@ -18,28 +18,38 @@
     status = "disabled";
 };
 
-/* 2. Re-configure the SPI pins to remove MISO (D9 / P1.14) so we can legally use it for CS */
-&spi2_default {
-    group1 {
-        psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
-                <NRF_PSEL(SPIM_MOSI, 1, 15)>;
+/* 2. Safely create NEW pin configurations that omit the MISO pin */
+&pinctrl {
+    spi2_no_miso_default: spi2_no_miso_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 15)>;
+        };
+    };
+
+    spi2_no_miso_sleep: spi2_no_miso_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 15)>;
+            low-power-enable;
+        };
     };
 };
 
-&spi2_sleep {
-    group1 {
-        psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
-                <NRF_PSEL(SPIM_MOSI, 1, 15)>;
-        low-power-enable;
-    };
-};
-
-/* 3. Apply your custom display wiring overrides */
+/* 3. Apply the new pins and your custom Prospector wiring */
 &xiao_spi {
     status = "okay";
+    
+    /* Use our custom pins defined above */
+    pinctrl-0 = <&spi2_no_miso_default>;
+    pinctrl-1 = <&spi2_no_miso_sleep>;
+    pinctrl-names = "default", "sleep";
+    
+    /* Assign custom CS pin */
     cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
     
-    st7789v@0 {
+    /* Override Prospector defaults (Zephyr uses st7789@0 for the node) */
+    st7789@0 {
         dc-gpios = <&xiao_d 7 GPIO_ACTIVE_HIGH>;
         reset-gpios = <&xiao_d 3 GPIO_ACTIVE_HIGH>;
     };
