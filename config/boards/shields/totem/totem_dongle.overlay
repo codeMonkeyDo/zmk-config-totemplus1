@@ -17,19 +17,7 @@
     status = "disabled";
 };
 
-/* Unlink the disabled scanner from the physical layout so the build process does not fail */
+/* 2. Unlink the disabled scanner from the physical layout to prevent build failures */
 &physical_layout0 {
     /delete-property/ kscan;
-};
-
-/* 2. Target the core SPI bus to set your custom CS pin (D9) */
-&spi2 {
-    status = "okay";
-    cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
-    
-    /* 3. Target the module's display node exactly by name to set DC (D7) and RST (D3) */
-    st7789v@0 {
-        dc-gpios = <&xiao_d 7 GPIO_ACTIVE_HIGH>;
-        reset-gpios = <&xiao_d 3 GPIO_ACTIVE_HIGH>;
-    };
 };
