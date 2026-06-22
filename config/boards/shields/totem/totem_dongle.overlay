@@ -4,14 +4,52 @@
  * SPDX-License-Identifier: MIT
  */
 
- #include "totem.dtsi"
+#include "totem.dtsi"
 
- &kscan0 {
-     col-gpios
-         = <&xiao_d 8 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 9 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 10 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 5 GPIO_ACTIVE_HIGH>
-         , <&xiao_d 4 GPIO_ACTIVE_HIGH>
-         ;
- };
+/* 1. Disable the physical matrix scanner on the dongle so it stops stealing the display's SPI pins */
+&kscan0 {
+    status = "disabled";
+};
+
+/ {
+    chosen {
+        zmk,kscan = &mock_kscan;
+    };
+
+    mock_kscan: mock_kscan_0 {
+        compatible = "zmk,kscan-mock";
+        columns = <0>;
+        rows = <0>;
+        events = <0>;
+    };
+};
+
+/* 2. Re-configure the SPI pins to remove MISO (D9 / P1.14) so we can legally use it for CS */
+&pinctrl {
+    spi2_default: spi2_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 15)>;
+        };
+    };
+    spi2_sleep: spi2_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 1, 15)>;
+            low-power-enable;
+        };
+    };
+};
+
+/* 3. Apply your custom display wiring overrides */
+&xiao_spi {
+    status = "okay";
+    /* Assign CS to D9 */
+    cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
+    
+    st7789v@0 {
+        /* Assign DC to D7 and RST to D3 */
+        dc-gpios = <&xiao_d 7 GPIO_ACTIVE_HIGH>;
+        reset-gpios = <&xiao_d 3 GPIO_ACTIVE_HIGH>;
+    };
+};
