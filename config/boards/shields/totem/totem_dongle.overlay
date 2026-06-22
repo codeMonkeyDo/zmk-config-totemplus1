@@ -5,6 +5,7 @@
  */
 
 #include "totem.dtsi"
+#include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
 /* 1. Disable the physical matrix scanner on the dongle so it stops stealing the display's SPI pins */
 &kscan0 {
@@ -44,11 +45,9 @@
 /* 3. Apply your custom display wiring overrides */
 &xiao_spi {
     status = "okay";
-    /* Assign CS to D9 */
     cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
     
     st7789v@0 {
-        /* Assign DC to D7 and RST to D3 */
         dc-gpios = <&xiao_d 7 GPIO_ACTIVE_HIGH>;
         reset-gpios = <&xiao_d 3 GPIO_ACTIVE_HIGH>;
     };
