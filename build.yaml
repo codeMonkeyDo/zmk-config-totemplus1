@@ -6,6 +6,5 @@ include:
   - board: xiao_ble//zmk
     shield: settings_reset
   - board: xiao_ble//zmk
-    shield: totem_dongle prospector_adapter
+    shield: prospector_adapter totem_dongle
     # snippet: zmk-usb-logging
-
