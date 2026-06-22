@@ -5,6 +5,7 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
 
 / {
     chosen {
@@ -20,6 +21,31 @@
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&kscan0>;
+        
+        /* Provide 41 mock 1U keys to satisfy the Studio compiler check. */
+        /* You will override this visual map by sideloading your info.json in ZMK Studio. */
+        keys =
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
+            <&key_physical_attrs 100 100 0 0 0 0 0>;
     };
 
     default_transform: keymap_transform_0 {
