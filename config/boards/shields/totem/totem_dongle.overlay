@@ -6,7 +6,7 @@
 
 #include "totem.dtsi"
 
-/* Disable the physical matrix scanner on the dongle so it doesn't fight the Prospector display pins */
+/* 1. Safely remove the physical matrix scanner on the dongle */
 / {
     chosen {
         /delete-property/ zmk,kscan;
@@ -15,4 +15,21 @@
 
 &kscan0 {
     status = "disabled";
+};
+
+/* Unlink the disabled scanner from the physical layout so the build process does not fail */
+&physical_layout0 {
+    /delete-property/ kscan;
+};
+
+/* 2. Target the core SPI bus to set your custom CS pin (D9) */
+&spi2 {
+    status = "okay";
+    cs-gpios = <&xiao_d 9 GPIO_ACTIVE_LOW>;
+    
+    /* 3. Target the module's display node exactly by name to set DC (D7) and RST (D3) */
+    st7789v@0 {
+        dc-gpios = <&xiao_d 7 GPIO_ACTIVE_HIGH>;
+        reset-gpios = <&xiao_d 3 GPIO_ACTIVE_HIGH>;
+    };
 };
