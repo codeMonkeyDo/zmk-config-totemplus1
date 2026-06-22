@@ -10,20 +10,18 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
-        /* Tell ZMK Studio to use this layout */
+        /* REQUIRED for Studio: Use physical-layout instead of matrix_transform */
         zmk,physical-layout = &physical_layout0;
     };
 
-    /* Minimal Physical Layout to satisfy ZMK Studio */
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&kscan0>;
         
-        /* Provide 41 mock 1U keys to satisfy the Studio compiler check. */
-        /* You will override this visual map by sideloading your info.json in ZMK Studio. */
+        /* Studio requires the keys property. Supplying 41 generic 1U keys. */
+        /* ZMK Studio's Web UI will override these visuals using your info.json */
         keys =
             <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
             <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
