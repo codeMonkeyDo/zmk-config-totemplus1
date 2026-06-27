@@ -25,7 +25,7 @@
             <&key_physical_attrs 100 100 800 0 0 0 0>, <&key_physical_attrs 100 100 900 0 0 0 0>, <&key_physical_attrs 100 100 1000 0 0 0 0>, <&key_physical_attrs 100 100 1100 0 0 0 0>, <&key_physical_attrs 100 100 1200 0 0 0 0>,
 
             /* Top row (missing layer key, INDEX 10: now Dummy Key Hidden off-screen to preserve indexing) */
-            <&key_physical_attrs 1 1 -9999 -9999 0 0 0>,
+            <&key_physical_attrs 1 1 9999 9999 0 0 0>,
 
             /* Middle Row (12 keys, Indices 11 to 22) */
             <&key_physical_attrs 100 100 0 100 0 0 0>, <&key_physical_attrs 100 100 100 100 0 0 0>, <&key_physical_attrs 100 100 200 100 0 0 0>, <&key_physical_attrs 100 100 300 100 0 0 0>, <&key_physical_attrs 100 100 400 100 0 0 0>, <&key_physical_attrs 100 100 500 100 0 0 0>,
