@@ -4,7 +4,14 @@
 if SHIELD_TOTEM_LEFT
 
 config ZMK_KEYBOARD_NAME
-    default "TOTEM Plus 1"
+    default "Totem+1 (left)"
+
+endif
+
+if SHIELD_TOTEM_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "Totem+1 (right)"
 
 endif
 
