@@ -19,29 +19,23 @@
         transform = <&default_transform>;
         kscan = <&kscan0>;
         
-        /* 41 mock keys to satisfy Studio compiler and match the 41 indices */
+        /* 41 keys spaced out in a proper visual grid so they don't stack */
         keys =
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 0 0 0 0 0>,
-            <&key_physical_attrs 100 100 0 0 0 0 0>;
+            /* Top Row (11 slots: 0 to 10) */
+            <&key_physical_attrs 100 100 0 0 0 0 0>, <&key_physical_attrs 100 100 100 0 0 0 0>, <&key_physical_attrs 100 100 200 0 0 0 0>, <&key_physical_attrs 100 100 300 0 0 0 0>, <&key_physical_attrs 100 100 400 0 0 0 0>,
+            <&key_physical_attrs 100 100 700 0 0 0 0>, <&key_physical_attrs 100 100 800 0 0 0 0>, <&key_physical_attrs 100 100 900 0 0 0 0>, <&key_physical_attrs 100 100 1000 0 0 0 0>, <&key_physical_attrs 100 100 1100 0 0 0 0>, <&key_physical_attrs 100 100 1200 0 0 0 0>,
+
+            /* Middle Row (12 slots: 11 to 22) */
+            <&key_physical_attrs 100 100 0 100 0 0 0>, <&key_physical_attrs 100 100 100 100 0 0 0>, <&key_physical_attrs 100 100 200 100 0 0 0>, <&key_physical_attrs 100 100 300 100 0 0 0>, <&key_physical_attrs 100 100 400 100 0 0 0>, <&key_physical_attrs 100 100 500 100 0 0 0>,
+            <&key_physical_attrs 100 100 700 100 0 0 0>, <&key_physical_attrs 100 100 800 100 0 0 0>, <&key_physical_attrs 100 100 900 100 0 0 0>, <&key_physical_attrs 100 100 1000 100 0 0 0>, <&key_physical_attrs 100 100 1100 100 0 0 0>, <&key_physical_attrs 100 100 1200 100 0 0 0>,
+
+            /* Bottom Row (12 slots: 23 to 34) */
+            <&key_physical_attrs 100 100 0 200 0 0 0>, <&key_physical_attrs 100 100 100 200 0 0 0>, <&key_physical_attrs 100 100 200 200 0 0 0>, <&key_physical_attrs 100 100 300 200 0 0 0>, <&key_physical_attrs 100 100 400 200 0 0 0>, <&key_physical_attrs 100 100 500 200 0 0 0>,
+            <&key_physical_attrs 100 100 700 200 0 0 0>, <&key_physical_attrs 100 100 800 200 0 0 0>, <&key_physical_attrs 100 100 900 200 0 0 0>, <&key_physical_attrs 100 100 1000 200 0 0 0>, <&key_physical_attrs 100 100 1100 200 0 0 0>, <&key_physical_attrs 100 100 1200 200 0 0 0>,
+
+            /* Thumb Row (6 slots: 35 to 40) */
+            <&key_physical_attrs 100 100 200 300 0 0 0>, <&key_physical_attrs 100 100 300 300 0 0 0>, <&key_physical_attrs 100 100 400 300 0 0 0>,
+            <&key_physical_attrs 100 100 700 300 0 0 0>, <&key_physical_attrs 100 100 800 300 0 0 0>, <&key_physical_attrs 100 100 900 300 0 0 0>;
     };
 
     default_transform: keymap_transform_0 {
